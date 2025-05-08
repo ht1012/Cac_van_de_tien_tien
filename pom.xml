@@ -10,5 +10,5 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.ct5.CT5</exec.mainClass>
     </properties>
-    <name>59_2251172528_PhanThiHuyenTrang_baitapCT5</name>
+    <name>59_2251172528_PhanThiHuyenTrang_BT1</name>
 </project>
