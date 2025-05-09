@@ -48,6 +48,7 @@ class NhanVienBanThoiGian extends NhanVien {
     public NhanVienBanThoiGian() {
         super("", 0);
     }
+    
 
     @Override
     public double tinhLuong() {
@@ -73,3 +74,4 @@ public class CT5 {
         nvBanThoiGian.hienThiLuong();
     }
 }
+//abcd
