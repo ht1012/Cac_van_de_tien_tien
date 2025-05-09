@@ -74,4 +74,3 @@ public class CT5 {
         nvBanThoiGian.hienThiLuong();
     }
 }
-//abcd
