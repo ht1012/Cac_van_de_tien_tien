@@ -1,85 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package pkg59_2251172528_phanthihuyentrang_bt3;
-interface ILogging {
-    void Log(String message);
-}
 
-interface INotifying {
-    void Notify(String message);
-}
+import java.util.Scanner;
 
-class FileLogger implements ILogging {
-    @Override
-    public void Log(String message) {
-        System.out.println("Ghi log: " + message);
+    interface Service {
+        void doStuff();
     }
-}
 
-class EmailNotifier implements INotifying {
-    @Override
-    public void Notify(String message) {
-        System.out.println("Gui thong bao email: " + message);
+
+    class DeliveryService implements Service {
+        @Override
+        public void doStuff() {
+            System.out.println("Dang thuc hien dich vu giao hang.");
+        }
     }
-}
 
-class SMSNotifier implements INotifying {
-    @Override
-    public void Notify(String message) {
-        System.out.println("Gui thong bao SMS: " + message);
+    class LaundryService implements Service {
+        @Override
+        public void doStuff() {
+            System.out.println("Dang thuc hien dich vu giat ui.");
+        }
     }
-}
 
-abstract class ServiceManager{
-    public abstract ILogging createLogger();
-    public abstract INotifying createNotifier();
-}
-
-class FileEmailServiceManager extends ServiceManager{
-
-    @Override
-    public ILogging createLogger(){
-        return new FileLogger();
+    abstract class ServiceManager {
+        public void someOperation() {
+            Service service = createService(); 
+            service.doStuff();                 
+        }
+        public abstract Service createService();
     }
-    
-    @Override
-    public INotifying createNotifier(){
-        return new EmailNotifier();
-    }
-}
 
-class FileSMSServiceManager extends ServiceManager{
+    class DeliveryServiceManager extends ServiceManager {
+        @Override
+        public Service createService() {
+            return new DeliveryService();
+        }
+    }
 
-    @Override
-    public ILogging createLogger(){
-        return new FileLogger();
+    class LaundryServiceManager extends ServiceManager {
+        @Override
+        public Service createService() {
+            return new LaundryService();
+        }
     }
-    
-    @Override
-    public INotifying createNotifier(){
-        return new SMSNotifier();
-    }
-}
 public class Main {
 
     public static void main(String[] args) {
-        ServiceManager email = new  FileEmailServiceManager();
-        ILogging log = email.createLogger();
-        INotifying not = email.createNotifier();
-        
-        log.Log("Email da duoc khoi tao");
-        not.Notify("Chao mung toi email");
-        
-        System.out.println("--------------------");
-        
-        ServiceManager SMS = new  FileSMSServiceManager();
-        ILogging log2 = SMS.createLogger();
-        INotifying not2 = SMS.createNotifier();
-        
-        log2.Log("SMS da duoc khoi tao");
-        not2.Notify("Chao mung toi sms");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("HE THONG QUAN LY DICH VU");
+        System.out.println("1. Dich vu giao hang");
+        System.out.println("2. Dich vu giat ui");
+        System.out.print("Chon dich vu (1-2): ");
+        int choice = scanner.nextInt();
+
+        ServiceManager manager;
+
+        switch (choice) {
+            case 1:
+                manager = new DeliveryServiceManager();
+                break;
+            case 2:
+                manager = new LaundryServiceManager();
+                break;
+            default:
+                System.out.println("Lua chon dich vu.");
+                return;
+        }
+
+        manager.someOperation();
         
     }
     
